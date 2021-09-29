@@ -22,7 +22,7 @@
 
 ```
   import TreeSelect from 'vue2-tree-select'
-  import 'vue2-tree-select/css/index.css'
+  import 'vue2-tree-select/dist/css/index.css'
 
   Vue.use(TreeSelect)
 ```
@@ -31,7 +31,7 @@
 
 ```
   import TreeSelect from 'vue2-tree-select'
-  import 'vue2-tree-select/css/index.css'
+  import 'vue2-tree-select/dist/css/index.css'
 
   components: {
     TreeSelect

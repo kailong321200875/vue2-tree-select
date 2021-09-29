@@ -1,6 +1,6 @@
 {
   "name": "vue2-tree-select",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "基于vue2 & element-ui的下拉树组件",
   "author": "Archer <502431556@qq.com>",
   "private": false,
@@ -41,6 +41,14 @@
     "popper.js": "^0.6.4",
     "resize-observer-polyfill": "^1.5.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kailong321200875/vue2-tree-select"
+  },
+  "bugs": {
+    "url": "https://github.com/kailong321200875/vue2-tree-select/issues"
+  },
+  "homepage": "https://github.com/kailong321200875/vue2-tree-select#readme",
   "devDependencies": {
     "element-ui": "^2.15.6",
     "vue": "^2.6.14",

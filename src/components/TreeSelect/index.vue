@@ -144,7 +144,9 @@
             @node-click="handleNodeClick"
           >
             <div slot-scope="{ data }">
-              <slot :data="data"></slot>
+              <slot :data="data">{{
+                props && props.label ? data[props.label] : data['label']
+              }}</slot>
             </div>
           </el-tree>
         </el-scrollbar>
@@ -924,7 +926,7 @@ export default class TreeSelect extends Mixins(vuePopper, emitter) {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 
   &__wrap {
-    height: 204px;
+    height: 204px !important;
     padding: 10px 0;
   }
 

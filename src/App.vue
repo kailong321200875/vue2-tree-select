@@ -126,11 +126,28 @@
       :render-content="renderContent"
       @change="treeSelectChange"
     />
+
+    <tree-select
+      v-model="value11"
+      filterable
+      show-checkbox
+      multiple
+      collapse-tags
+      option-max-width="300px"
+      :clearable="true"
+      :default-expand-all="false"
+      :data="options"
+      placeholder="请选择"
+      @change="treeSelectChange"
+    >
+      <template #default="{ data }">{{ data.label + '插槽测试' }}</template>
+    </tree-select>
   </div>
 </template>
 
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
+// import TreeSelect from '@/components/TreeSelect/index.vue'
 import TreeSelect from '../dist/vue2-tree-select'
 import '../dist/css/index.css'
 import { Button } from 'element-ui'
@@ -153,6 +170,7 @@ export default class App extends Vue {
   private value8 = ''
   private value9 = []
   private value10 = []
+  private value11 = []
 
   created() {
     setTimeout(() => {
