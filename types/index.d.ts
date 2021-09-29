@@ -1,6 +1,8 @@
-import { Vue } from 'vue-property-decorator'
+import Vue from 'vue'
 
-export declare class TreeSelect extends Vue {
+declare class TreeSelect extends Vue {
+  static install(vue: typeof Vue): void
+
   data: any[]
 
   id: string
@@ -49,3 +51,5 @@ export declare class TreeSelect extends Vue {
 
   renderContent: Fn
 }
+
+export default TreeSelect
