@@ -1,6 +1,6 @@
 {
   "name": "vue2-tree-select",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "基于vue2 & element-ui的下拉树组件",
   "author": "Archer <502431556@qq.com>",
   "private": false,
@@ -15,7 +15,6 @@
     "build": "node build/build.js pro",
     "build:report": "node build/build.js pro report",
     "clean": "npx rimraf node_modules",
-    "postinstall": "husky install",
     "check": "npm-check-updates"
   },
   "main": "dist/vue2-tree-select.js",
