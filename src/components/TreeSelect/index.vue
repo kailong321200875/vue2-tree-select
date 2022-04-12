@@ -131,10 +131,10 @@
             :default-expanded-keys="defaultExpandedKeys"
             :props="props"
             :default-expand-all="defaultExpandAll"
-            :node-key="nodeKey"
             :render-content="renderContent"
             :class="multiple ? 'tree-select--multiple' : 'tree-select'"
             v-bind="$attrs"
+            :node-key="nodeKey"
             :show-checkbox="showCheckbox"
             :expand-on-click-node="expandOnClickNode"
             :check-strictly="checkStrictly"
@@ -253,7 +253,7 @@ export default class TreeSelect extends Mixins(vuePopper, emitter) {
   @Prop({
     type: Function
   })
-  private load!: Fn
+  private load!: (...arg: any[]) => void
 
   @Prop({
     type: Boolean
@@ -280,7 +280,7 @@ export default class TreeSelect extends Mixins(vuePopper, emitter) {
   @Prop({
     type: Function
   })
-  private filterMethod!: Fn
+  private filterMethod!: (...arg: any[]) => void
 
   // @Prop({
   //   type: String,
@@ -316,7 +316,7 @@ export default class TreeSelect extends Mixins(vuePopper, emitter) {
   @Prop({
     type: Function
   })
-  private renderContent!: Fn
+  private renderContent!: (...arg: any[]) => void
 
   private query = ''
   private selectedLabel = ''
@@ -415,7 +415,7 @@ export default class TreeSelect extends Mixins(vuePopper, emitter) {
       this.query = ''
       this.selectedLabel = ''
       if (!this.multiple) {
-        this.selectedLabel = this.selected.label || ''
+        this.selectedLabel = this.selected[(this.props && this.props.label) || 'label'] || ''
         if (this.filterable) this.query = this.selectedLabel
       }
       if (this.filterable) {
@@ -532,7 +532,7 @@ export default class TreeSelect extends Mixins(vuePopper, emitter) {
   private handleNodeClick(data: any, node: any) {
     this.isSetDefault = true
     if (this.showCheckbox) return
-    let value = node.data.value
+    let value = node.data[this.nodeKey] || node.data.value
     const child = node.childNodes
     if (child.length === 0 || !this.expandOnClickNode) {
       if (this.multiple) {
@@ -575,9 +575,10 @@ export default class TreeSelect extends Mixins(vuePopper, emitter) {
   }
 
   private handleCheck(data: any, info: any) {
+    if (!this.multiple) return
     this.isSetDefault = true
     const { checkedNodes } = info
-    const values = checkedNodes.map(({ value }: any) => value)
+    const values = checkedNodes.map((obj: any) => obj[this.nodeKey] || obj.value)
     if (this.filterable) (this.$refs.input as ElInput).focus()
     this.$emit('input', values)
     this.emitChange(values)
@@ -589,10 +590,10 @@ export default class TreeSelect extends Mixins(vuePopper, emitter) {
       const traverse = (arr: any) => {
         for (let i = 0; i < arr.length; i++) {
           const child = arr[i]
-          if (child.value === value) {
+          if (child[this.nodeKey || 'value'] === value) {
             node = {
-              label: child.label,
-              value: child.value
+              label: child[this.props && this.props.label] || child.label,
+              value: child[this.nodeKey || 'value']
             }
             break
           } else if (child.children && child.children.length > 0) {
@@ -688,7 +689,7 @@ export default class TreeSelect extends Mixins(vuePopper, emitter) {
           const node: any = this.getNodeData(value)
           if (node) {
             result.push(node)
-            title.push(node.label)
+            title.push(node[this.props && this.props.label] || node.label)
           }
         })
       }
@@ -699,7 +700,7 @@ export default class TreeSelect extends Mixins(vuePopper, emitter) {
       const node: any = this.getNodeData(this.value)
       if (node) {
         this.selected = node
-        this.selectedLabel = node.label
+        this.selectedLabel = node[this.props && this.props.label] || node.label
         if (this.filterable) this.query = this.selectedLabel
       }
     }

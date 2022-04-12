@@ -142,14 +142,28 @@
     >
       <template #default="{ data }">{{ data.label + '插槽测试' }}</template>
     </tree-select>
+
+    <tree-select
+      v-model="value12"
+      option-max-width="300px"
+      :clearable="true"
+      :default-expand-all="false"
+      node-key="id"
+      :props="{
+        label: 'name'
+      }"
+      :data="options2"
+      placeholder="请选择"
+      @change="treeSelectChange"
+    />
   </div>
 </template>
 
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
-// import TreeSelect from '@/components/TreeSelect/index.vue'
-import TreeSelect from '../dist/vue2-tree-select'
-import '../dist/css/index.css'
+import TreeSelect from '@/components/TreeSelect/index.vue'
+// import TreeSelect from '../dist/vue2-tree-select'
+// import '../dist/css/index.css'
 import { Button } from 'element-ui'
 Vue.use(Button)
 
@@ -160,6 +174,7 @@ Vue.use(Button)
 })
 export default class App extends Vue {
   private options: any[] = []
+  private options2: any[] = []
   private value1 = ''
   private value2 = 'breadcrumb'
   private value3 = []
@@ -171,6 +186,7 @@ export default class App extends Vue {
   private value9 = []
   private value10 = []
   private value11 = []
+  private value12 = ''
 
   created() {
     setTimeout(() => {
@@ -438,6 +454,18 @@ export default class App extends Vue {
             {
               value: 'jiaohu',
               label: '组件交互文档'
+            }
+          ]
+        }
+      ]
+      this.options2 = [
+        {
+          name: '别名测试',
+          id: '2',
+          children: [
+            {
+              name: '别名测试2',
+              id: '3'
             }
           ]
         }
