@@ -1,6 +1,6 @@
 {
   "name": "vue2-tree-select",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "基于vue2 & element-ui的下拉树组件",
   "author": "Archer <502431556@qq.com>",
   "private": false,
