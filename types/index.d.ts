@@ -29,7 +29,7 @@ declare class TreeSelect extends Vue {
 
   lazy: boolean
 
-  load: Fn
+  load: (...arg: any[]) => void
 
   showCheckbox: boolean
 
@@ -39,7 +39,7 @@ declare class TreeSelect extends Vue {
 
   filterable: boolean
 
-  filterMethod: Fn
+  filterMethod: (...arg: any[]) => void
 
   collapseTags: boolean
 
@@ -49,7 +49,7 @@ declare class TreeSelect extends Vue {
 
   optionMaxWidth: string
 
-  renderContent: Fn
+  renderContent: (...arg: any[]) => void
 }
 
 export default TreeSelect
